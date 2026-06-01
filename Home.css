@@ -1,0 +1,118 @@
+import { initializeApp } from "firebase/app";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  signOut
+} from "firebase/auth";
+import {
+  addDoc,
+  collection,
+  getFirestore
+} from "firebase/firestore";
+import { toast } from "react-toastify";
+
+// Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyBuCYvpcIJlESG5PhoYCjeG4KW_P6q9WNo",
+  authDomain: "netflix-clone-bbf42.firebaseapp.com",
+  projectId: "netflix-clone-bbf42",
+  storageBucket: "netflix-clone-bbf42.firebasestorage.app",
+  messagingSenderId: "48273830814",
+  appId: "1:48273830814:web:b571a9fc1b34230664dc8f"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// Map all error codes with friendly messages
+const getErrorMessage = (errorCode) => {
+  if (!errorCode) return "An unexpected error occurred. Please try again.";
+
+  const code = errorCode.toLowerCase();
+
+  const errors = {
+    // Sign up
+    "auth/email-already-in-use": "This email is already registered.",
+    "auth/invalid-email": "Please enter a valid email address.",
+    "auth/missing-email": "Email field cannot be empty.",
+    "auth/weak-password": "Password must be at least 6 characters.",
+    "auth/invalid-password": "Password format is not valid.",
+
+    // Login
+    "auth/wrong-password": "Incorrect password. Please try again.",
+    "auth/user-not-found": "No account found with this email.",
+    "auth/invalid-credential": "Incorrect email or password.",
+    "auth/invalid-login-credentials": "Incorrect email or password.",
+
+    // Input issues
+    "auth/argument-error": "Invalid input. Check your email and password.",
+    "auth/internal-error": "Something went wrong. Please try again.",
+
+    // Rate limit
+    "auth/too-many-requests": "Too many attempts. Please try again later.",
+
+    // Network
+    "auth/network-request-failed": "Network error. Check your internet connection."
+  };
+
+  if (!errors[code]) console.warn("Unhandled Firebase error:", errorCode);
+
+  return errors[code] || "An unexpected error occurred. Please try again.";
+};
+
+// Auth functions
+
+const signup = async (name, email, password) => {
+  try {
+    const res = await createUserWithEmailAndPassword(auth, email, password);
+    const user = res.user;
+
+    await addDoc(collection(db, "users"), {
+      uid: user.uid,
+      name,
+      email,
+      authProvider: "local",
+    });
+
+    toast.success("Account created successfully.");
+  } catch (error) {
+    console.log("FIREBASE SIGNUP ERROR:", error.code);
+    toast.error(getErrorMessage(error.code));
+  }
+};
+
+const login = async (email, password) => {
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    toast.success("Logged in successfully.");
+  } catch (error) {
+    console.log("FIREBASE LOGIN ERROR:", error.code);
+    toast.error(getErrorMessage(error.code));
+  }
+};
+
+const resetPassword = async (email) => {
+  try {
+    await sendPasswordResetEmail(auth, email);
+    toast.success("Password reset email has been sent.");
+  } catch (error) {
+    console.log("FIREBASE RESET ERROR:", error.code);
+    toast.error(getErrorMessage(error.code));
+  }
+};
+
+const logout = async () => {
+  try {
+    await signOut(auth);
+    toast.success("Logged out successfully.");
+  } catch (error) {
+    console.log("FIREBASE LOGOUT ERROR:", error.code);
+    toast.error("Unable to log out. Please try again.");
+  }
+};
+
+export { auth, db, login, signup, resetPassword, logout };

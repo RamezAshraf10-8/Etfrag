@@ -1,0 +1,96 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./HelpCentre.css";
+
+const popularTopics = [
+  {
+    title: "Managing your profile",
+    content: "Go to your profile settings to update your name, email, avatar, and manage parental controls for kids."
+  },
+  {
+    title: "Payment & subscription",
+    content: "Check your subscription status, billing history, and update your payment method securely in the account settings."
+  },
+  {
+    title: "Parental controls",
+    content: "Enable Kids Mode or set content ratings to restrict access to age-appropriate movies for your children."
+  }
+];
+
+const commonQuestions = [
+  {
+    title: "How do I reset my password?",
+    content: "Go to Login → Forgot Password. A reset link will be sent to your email to reset your password."
+  },
+  {
+    title: "Why is my video not loading?",
+    content: "Try refreshing the page or switching to a better internet connection. Ensure your browser is up-to-date."
+  },
+  {
+    title: "How can I contact support?",
+    content: "You can contact us anytime through the Contact Us section at the footer or via our email etfrag.helpteam@gmail.com."
+  }
+];
+
+const HelpCentre = () => {
+  const navigate = useNavigate();
+  const [activePopular, setActivePopular] = useState(null);
+  const [activeFAQ, setActiveFAQ] = useState(null);
+
+  const togglePopular = (index) => {
+    setActivePopular(activePopular === index ? null : index);
+  };
+
+  const toggleFAQ = (index) => {
+    setActiveFAQ(activeFAQ === index ? null : index);
+  };
+
+  return (
+    <div className="help-container">
+      <h1>Help Centre</h1>
+      <p>Welcome to Etfrag Help Centre! Here you can find answers to common questions, troubleshooting guides, and tips to get the best experience.</p>
+
+      <div className="help-sections">
+        {/* Popular Topics */}
+        <div className="help-column">
+          <h3 className="section-title">Popular Topics:</h3>
+          <ul className="help-topics">
+            {popularTopics.map((topic, index) => (
+              <li key={index}>
+                <div 
+                  className={`topic-title ${activePopular === index ? "active" : ""}`} 
+                  onClick={() => togglePopular(index)}
+                >
+                  {topic.title} <span>{activePopular === index ? "−" : "+"}</span>
+                </div>
+                {activePopular === index && <div className="topic-content">{topic.content}</div>}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Common Questions */}
+        <div className="help-column">
+          <h3 className="section-title">Common Questions:</h3>
+          <ul className="help-topics">
+            {commonQuestions.map((q, index) => (
+              <li key={index}>
+                <div
+                  className={`topic-title ${activeFAQ === index ? "active" : ""}`}
+                  onClick={() => toggleFAQ(index)}
+                >
+                  {q.title} <span>{activeFAQ === index ? "−" : "+"}</span>
+                </div>
+                {activeFAQ === index && <div className="topic-content">{q.content}</div>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <button className="back-btn" onClick={() => navigate(-1)}>← Back</button>
+    </div>
+  );
+};
+
+export default HelpCentre;

@@ -1,0 +1,77 @@
+.profile-selector {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 10px;
+}
+
+.profile-card {
+  width: 100px;
+  cursor: pointer;
+  text-align: center;
+  transition: 0.2s;
+}
+
+.profile-card:hover {
+  transform: scale(1.05);
+}
+
+.profile-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.add {
+  border: 2px dashed #888;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.add span {
+  font-size: 40px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* BACK BUTTON */
+.back-btn {
+  display: inline-block;
+  margin-bottom: 20px;
+  background-color: #ED9618; 
+  border: none;
+  padding: 8px 16px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: 0.2s;
+}
+
+.back-btn:hover {
+  background-color: #f0a841;
+}
+
+.avatar-wrapper {
+  position: relative;
+}
+
+.trash-icon {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  color: #ED9618;
+  background-color: rgba(0,0,0,0.6);
+  border-radius: 50%;
+  padding: 4px;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 14px;
+}
+
+.trash-icon:hover {
+  color: white;
+  background-color: #f0a841;
+}

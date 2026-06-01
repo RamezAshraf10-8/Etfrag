@@ -1,0 +1,21 @@
+import React from 'react';
+import './Footer.css';
+import { useNavigate } from 'react-router-dom';
+
+const Footer = () => {
+  const navigate = useNavigate();
+
+  return (
+    <div className="footer">
+      <ul className="footer-links">
+        <li onClick={() => navigate("/help")}>Help Centre</li>
+        <li onClick={() => navigate("/terms")}>Terms of Use</li>
+        <li onClick={() => navigate("/contact")}>Contact Us</li>
+      </ul>
+
+      <p className="copyright-text">© Etfrag, Inc. 2025</p>
+    </div>
+  );
+};
+
+export default Footer;

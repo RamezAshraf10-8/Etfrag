@@ -1,0 +1,255 @@
+/* ===========================
+   General Home Section
+=========================== */
+.home {
+  padding-left: 6%;
+  padding-right: 6%;
+  background-color: #141414;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* ===========================
+   Hero Section
+=========================== */
+.hero {
+  position: relative;
+  height: 70vh; 
+  overflow: hidden;
+}
+
+/* Hero slides */
+.hero-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.hero-slide.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* Hero banner image */
+.banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  mask-image: linear-gradient(to right, transparent, #000 75%);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 75%);
+}
+
+.hero-badge {
+  position: absolute;
+  top: 80px; 
+  left: 6%;
+  background-color: #ED9618;
+  color: #1a1f29;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  z-index: 3;
+  text-transform: uppercase;
+}
+
+.hero-overlay {
+  position: absolute;
+  bottom: 12%; 
+  left: 5%;
+  z-index: 2;
+  max-width: 550px;
+  color: #d4dbe6;
+}
+
+/* Description text */
+.hero-desc {
+  font-size: 1rem;
+  line-height: 1.4;
+  margin-bottom: 12px;
+  word-wrap: break-word;
+}
+
+/* Buttons container */
+.hero-btns {
+  display: flex;
+  gap: 6px;
+}
+
+/* ===========================
+   Buttons (compact height)
+=========================== */
+.hero-btns .btn {
+  border: 0;
+  outline: 0;
+  padding: 1px 6px;       
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.85rem;    
+  font-weight: 600;
+  line-height: 1;
+  min-height: 20px;      
+  background: #ED9618;
+  color: #1a1f29;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+
+.hero-btns .btn:hover {
+  background: #ffae45;
+}
+
+.hero-btns .btn.dark-btn {
+  color: #e8edf4;
+  background: rgba(255,255,255,0.15);
+}
+.hero-btns .btn.dark-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.hero-btns .btn img {
+  width: 50px;
+  height: 50px;
+}
+
+/* Arrows */
+.hero-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(20,20,20,0.5);
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-arrow img {
+  width: 20px;
+  height: 20px;
+}
+
+.hero-arrow.left {
+  left: 20px;
+}
+
+.hero-arrow.right {
+  right: 20px;
+}
+
+/* Dots */
+.hero-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 4;
+}
+
+.hero-dots .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(255,255,255,0.5);
+  cursor: pointer;
+}
+
+.hero-dots .dot.active {
+  background-color: #ED9618;
+}
+
+/* ===========================
+   Responsive adjustments
+=========================== */
+@media (max-width: 1024px) {
+  .hero-overlay {
+    max-width: 450px;
+    bottom: 14%;
+  }
+  .hero-desc {
+    font-size: 0.9rem;
+  }
+  .hero-btns .btn {
+    padding: 2px 10px;
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-overlay {
+    max-width: 90%;
+    bottom: 16%;
+  }
+  .hero-desc {
+    font-size: 0.85rem;
+  }
+  .hero-btns {
+    flex-direction: column; 
+    gap: 4px;
+  }
+  .hero-btns .btn {
+    width: 100%;
+    text-align: center;
+    padding: 2px 10px;
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-overlay {
+    bottom: 18%;
+  }
+  .hero-desc {
+    font-size: 0.8rem;
+  }
+  .hero-btns .btn {
+    padding: 2px 8px;
+    font-size: 0.6rem;
+  }
+}
+.genre-filter {
+  display: flex;
+  justify-content: left;
+  margin: 20px 0;
+}
+
+.genre-filter select {
+  padding: 8px 12px;
+  border-radius: 5px;
+  border: none;
+  background-color: #111; 
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  min-width: 180px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.genre-filter select:hover,
+.genre-filter select:focus {
+  background-color: #222;
+  outline: none;
+}
+
+
+.genre-filter select option {
+  background-color: #111;
+  color: #fff;
+}
+
+.genre-filter select:focus {
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}
